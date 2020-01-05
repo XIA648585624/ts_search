@@ -1,0 +1,34 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /ts
+    jsp:
+      init-parameters:
+        development: true
+  max-http-header-size: 8192
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp #视图解析器
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.97.208.42:3306/ts?characterEncoding=UTF-8&serverTimezone=GMT&userSSL=false
+    username: root
+    password: 0621Xsb..
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    elasticsearch: #es的相关配置
+      cluster-nodes: 47.97.208.42:9300
+  redis: #redis的相关配置
+    host: 47.97.208.42
+    port: 7000
+    database: 0
+
+mybatis:
+  type-aliases-package: henu.xmh.pojo
+  mapper-locations: classpath*:henu/xmh/mapper/*.xml
+logging: #日志文件相关配置
+  level:
+    root: info
+    henu.xmh.dao: debug

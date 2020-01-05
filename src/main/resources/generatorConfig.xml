@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入属性配置-->
+    <properties resource="jdbc.properties"></properties>
+    <!--指定数据库驱动jar包的位置-->
+    <classPathEntry location="${jdbc.driverLocation}"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接信息 -->
+        <jdbcConnection
+                driverClass="${driver}"
+                connectionURL="${url}"
+                userId="${jdbc.username}"
+                password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- 默认为false，把JDBC DECIMAL 和NUMERIC类型解析为Integer，为true时
+        把JDBC DECIMAL 和NUMERIC类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject：生成POJO类的位置 -->
+        <javaModelGenerator targetPackage="henu.xmh.pojo" targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- Mapper文件生成 的位置 -->
+        <sqlMapGenerator targetPackage="henu.xmh.mapper" targetProject=".\src\main\resources">
+            <!-- 是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- Mapper接口生成的位置 -->
+        <javaClientGenerator targetPackage="henu.xmh.dao" type="XMLMAPPER" targetProject=".\src\main\java">
+            <!-- 是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库中那些表通过逆向工程生成以上文件
+        PROVINCE                       TABLE
+        TOURUSER                        TABLE
+        VIEWSPORT                       TABLE -->
+        <table tableName="t_category" schema=""></table>
+        <table tableName="t_poem" schema=""></table>
+
+    </context>
+</generatorConfiguration>
